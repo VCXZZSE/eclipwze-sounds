@@ -7,6 +7,15 @@
   const button=form.querySelector('button[type="submit"]');
   const label=button.querySelector('span');
   let sending=false;
+  const directEmail=dialog.querySelector('.contact-direct a');
+  function updateDirectEmail(){
+    const values=Object.fromEntries(new FormData(form));
+    const subject='Eclipwze Sounds — '+(values.enquiry||'Website enquiry');
+    const body='Name: '+(values.name||'')+'\nEmail: '+(values.email||'')+'\nPhone: '+(values.phone||'')+'\n\n'+(values.message||'');
+    directEmail.href='mailto:eclipwze74@gmail.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+  }
+  form.addEventListener('input',updateDirectEmail);
+  form.addEventListener('change',updateDirectEmail);
   document.addEventListener('click',event=>{
     const trigger=event.target.closest('[data-contact]');
     if(!trigger)return;
@@ -56,6 +65,8 @@
     }catch(error){
       note.dataset.state='error';
       note.textContent=error.name==='AbortError'?'The connection timed out. Your message is still here; try again or email us directly.':(error.message||'We couldn’t confirm your submission. Your message is still here; try again or email us directly.');
+      updateDirectEmail();
+      note.textContent+=' The email link below includes your message.';
       label.textContent='Try sending again';
     }finally{
       clearTimeout(timeout);sending=false;button.disabled=false;form.removeAttribute('aria-busy');
