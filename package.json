@@ -1,0 +1,21 @@
+{
+  "name": "eclipwze-sounds",
+  "version": "1.0.0",
+  "description": "Eclipwze Sounds — Bringing The Rhythm, Raising The Decibels. A music collective from Kolkata.",
+  "type": "module",
+  "scripts": {
+    "dev": "npx serve .",
+    "build": "echo 'Static site - no build needed'",
+    "lint": "echo 'No linter configured'"
+  },
+  "keywords": [
+    "music",
+    "collective",
+    "eclipwze"
+  ],
+  "author": "Eclipwze Sounds",
+  "license": "ISC",
+  "dependencies": {
+    "@vercel/speed-insights": "^2.0.0"
+  }
+}
