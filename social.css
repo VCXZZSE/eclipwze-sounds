@@ -1,22 +1,19 @@
-/* Quiet links, like a little maker's mark at the end of the sleeve. */
-.band-socials{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
-.band-socials .social-link{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-width:44px;min-height:44px;color:inherit;text-decoration:none;border:0;line-height:1.3}
-.band-socials .social-icon{display:grid;place-items:center;width:38px;height:38px;border:1px solid currentColor;border-radius:50%;opacity:.72;transition:opacity .2s,transform .2s,background .2s}
+/* Small signatures at the edge of the page. */
+.band-socials{display:flex;align-items:center;gap:0;flex-shrink:0}
+.band-socials .social-link{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;color:inherit;text-decoration:none;border:0;line-height:1}
+.band-socials .social-icon{display:grid;place-items:center;opacity:.68;transition:opacity .2s,color .2s}
 .band-socials svg{display:block;width:17px;height:17px}
-.band-socials .social-name{font-size:11px;letter-spacing:.02em}
-.band-socials .social-link:focus-visible{outline:2px solid #d77a55;outline-offset:4px;border-radius:3px}
+.band-socials .social-link:focus-visible{outline:2px solid #d77a55;outline-offset:-3px;border-radius:3px}
 .band-socials .social-link:focus-visible .social-icon{opacity:1}
-.social-corner{border-top:1px solid #eeeade50;padding-top:23px;align-self:start;color:#eeeade}
-.social-corner .social-kicker{font-size:8px;letter-spacing:.14em;color:#c7cdb8}
-.social-corner h3{font-family:var(--serif,Georgia,serif);font-weight:500;font-size:clamp(29px,3.2vw,43px);line-height:1.15;letter-spacing:-.035em;margin:15px 0 16px}
-.social-corner h3 em{color:#d5805c}
-.social-corner>p{font-size:12px;line-height:1.9;color:#c7cdb8;margin:0 0 20px}
-.social-corner .band-socials{gap:25px}
-.social-corner .social-footnote{display:block;font-size:8px;letter-spacing:.11em;color:#a8ae9e;border-top:1px solid #eeeade28;padding-top:20px;margin-top:24px}
-.footer-bottom .studios-link{font-size:9px;display:inline-flex;min-height:44px;align-items:center;transition:color .2s}
+.contact-grid.contact-compact{display:block;margin-top:32px;margin-bottom:32px}
+.contact-grid.contact-compact>div>p{margin-bottom:20px}
+.footer-bottom .footer-links{display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+.footer-bottom .footer-links>a{display:inline-flex;align-items:center;min-height:44px;font-size:9px;white-space:nowrap}
+.footer-bottom .studios-link{gap:7px}
+.footer-bottom .band-socials{color:#c7cdb8}
 .journal-footer .band-socials{margin-top:-15px;margin-bottom:-15px;color:#58634c}
 .journal-footer{align-items:center}
 body>footer:not(.journal-footer)>.band-socials{color:inherit}
-@media(hover:hover){.band-socials .social-link:hover .social-icon{opacity:1;transform:rotate(-8deg);background:#c5cdb414}.social-corner .social-link:hover{color:#f0c1a0}.footer-bottom .studios-link:hover{color:#d5805c}}
-@media(max-width:700px){.social-corner{padding-top:24px}.social-corner h3{font-size:36px}.social-corner>p{font-size:13px}.social-corner .band-socials{gap:23px}.social-corner .social-name{font-size:12px}.footer-bottom>.studios-link{width:auto;font-size:10px}.footer-bottom>a:last-child{width:100%}.journal-footer .band-socials{margin:0;gap:13px}.journal-footer{align-items:flex-start}}
-@media(prefers-reduced-motion:reduce){.band-socials .social-icon{transition:none}.band-socials .social-link:hover .social-icon{transform:none}}
+@media(hover:hover){.band-socials .social-link:hover .social-icon{opacity:1;color:#d5805c}.footer-bottom .footer-links>a:hover{color:#d5805c}}
+@media(max-width:700px){.contact-grid.contact-compact{margin-top:28px;margin-bottom:26px}.footer-bottom .footer-links{width:100%;justify-content:space-between;gap:6px}.journal-footer .band-socials{margin:-8px 0;gap:0}.journal-footer{align-items:flex-start}}
+@media(prefers-reduced-motion:reduce){.band-socials .social-icon{transition:none}}
