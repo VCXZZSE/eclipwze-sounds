@@ -1,0 +1,33 @@
+#contact-dialog{width:960px;padding:0;border:1px solid #c7c8b6;border-radius:12px;background:#f5f0e4;color:#22352b;max-height:calc(100dvh - 48px);overflow:auto;box-shadow:0 24px 110px #0007}
+#contact-dialog::backdrop{background:#122219c9;backdrop-filter:blur(8px)}
+#contact-dialog .dialog-top{margin:0;padding:17px 28px;border-bottom:1px solid #c9ccba;gap:20px;position:sticky;top:0;z-index:2;background:#f5f0e4}
+#contact-dialog .dialog-top .eyebrow{font-size:9px;letter-spacing:.16em}
+#contact-dialog .dialog-close{font-size:11px;min-height:40px;display:flex;align-items:center;gap:14px;padding:0 4px}
+#contact-dialog .dialog-close span{font-size:27px;font-weight:300}
+#contact-dialog .contact-layout{display:grid;grid-template-columns:.85fr 1.3fr}
+#contact-dialog .contact-intro{background:#dce2c9;padding:32px;display:flex;flex-direction:column;border-right:1px solid #c3cbb1}
+#contact-dialog .contact-star{font-size:40px;line-height:1;color:#b34c2e;margin-bottom:28px}
+#contact-dialog h2{font-family:var(--serif,Georgia,serif);font-size:clamp(42px,4.8vw,65px);font-weight:500;letter-spacing:-.055em;line-height:1.04;margin:0 0 22px}
+#contact-dialog h2 em{color:#a2462c}
+#contact-dialog .contact-intro>p{font-size:13px;line-height:1.9;color:#435341;max-width:26ch}
+#contact-dialog .contact-signoff{padding-top:50px;margin-top:auto;display:grid;gap:6px;font-size:11px;letter-spacing:.12em}
+#contact-dialog .contact-signoff small{font-size:8px;letter-spacing:.09em;color:#53634b}
+#contact-dialog .contact-compose{padding:32px}
+#contact-dialog form{display:grid;grid-template-columns:1fr 1fr;gap:22px 20px;margin:0}
+#contact-dialog label{font-size:11px;font-weight:500;color:#293c2d;display:block;grid-column:auto}
+#contact-dialog label.wide,#contact-dialog .wide{grid-column:1/-1}
+#contact-dialog input:not([type="hidden"]),#contact-dialog select,#contact-dialog textarea{display:block;width:100%;margin-top:8px;background:#fffdf5;border:1px solid #b7c0ab;border-radius:5px;font-size:13px;color:#213229;padding:12px;min-height:46px;line-height:1.5}
+#contact-dialog input::placeholder,#contact-dialog textarea::placeholder{color:#73796d;opacity:1}
+#contact-dialog textarea{min-height:120px;resize:vertical;max-height:260px}
+#contact-dialog .contact-optional{font-size:10px;color:#69725f;font-weight:400}
+#contact-dialog .contact-send{background:#253c2c;color:#f6f1e5;border-radius:6px;display:flex;align-items:center;justify-content:space-between;padding:15px 20px;min-height:52px;font-size:13px;transition:background .2s;gap:16px}
+#contact-dialog .contact-send:hover{background:#a2472b}
+#contact-dialog .contact-send:disabled{cursor:wait;opacity:.7}
+#contact-dialog .contact-send>span:last-child{font-size:22px;line-height:1}
+#contact-dialog .form-note{color:#52624c;font-size:11px;line-height:1.65;margin: -9px 0 0;min-height:18px}
+#contact-dialog .form-note[data-state="error"]{color:#a02d24}
+#contact-dialog .form-note[data-state="success"]{color:#245839;font-weight:600}
+#contact-dialog .contact-direct{border-top:1px solid #d1d3c1;padding-top:17px;margin-top:22px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:7px;font-size:11px;color:#63705b}
+#contact-dialog .contact-direct a{color:#2b412e;text-decoration:underline;text-underline-offset:4px;overflow-wrap:anywhere}
+#contact-dialog .contact-honey{display:none!important}
+@media(max-width:700px){#contact-dialog{max-width:calc(100% - 24px);max-height:calc(100dvh - 24px);border-radius:10px}#contact-dialog .dialog-top{padding:10px 20px}#contact-dialog .dialog-top .eyebrow{font-size:8px}#contact-dialog .contact-layout{grid-template-columns:1fr}#contact-dialog .contact-intro{padding:23px 24px;position:relative;border-right:0;border-bottom:1px solid #c3cbb1}#contact-dialog h2{font-size:42px;margin:0 0 10px;max-width:85%}#contact-dialog h2 br{display:none}#contact-dialog .contact-star{position:absolute;right:23px;top:26px;font-size:30px;margin:0}#contact-dialog .contact-intro>p{font-size:12px;max-width:34ch;line-height:1.7}#contact-dialog .contact-signoff{display:none}#contact-dialog .contact-compose{padding:24px}#contact-dialog form{gap:20px;grid-template-columns:1fr}#contact-dialog label{grid-column:1/-1;font-size:12px}#contact-dialog input:not([type="hidden"]),#contact-dialog select,#contact-dialog textarea{font-size:16px;min-height:50px}#contact-dialog textarea{min-height:125px}#contact-dialog .contact-direct{font-size:11px}#contact-dialog .contact-send{min-height:54px;font-size:14px}}

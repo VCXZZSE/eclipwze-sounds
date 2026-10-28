@@ -42,14 +42,12 @@ document.addEventListener('click',e=>{
  const play=e.target.closest('[data-play]');if(play){if($('#media-dialog').open)$('#media-dialog').close();playVideo(play.dataset.play,play.dataset.title);return;}
  const article=e.target.closest('[data-article]');if(article)openArticle(article.dataset.article);
  const album=e.target.closest('[data-album]');if(album)openAlbum(album.dataset.album);
- if(e.target.closest('[data-contact]')){openDialog($('#contact-dialog'));try{const draft=JSON.parse(localStorage.getItem('eclipwze-message-draft')||'null');if(draft)for(const [key,value]of Object.entries(draft)){if($('#contact-form').elements[key])$('#contact-form').elements[key].value=value;}}catch{}}
  if(e.target.closest('[data-store]')){showInfo('Store opening soon','Sign up to be the first to know when we go live.','https://eclipwze74.wixsite.com/eclipwze/coming-soon-01','Notify me on the original website ↗');}
  if(e.target.closest('[data-about-studios]')){showInfo('Eclipwze Studios','We are The Eclipwze Sounds. Bringing the rhythm, raising the decibels.','https://eclipwze74.wixsite.com/eclipwze/copy-of-about-us','Original about page ↗');}
 });
 function showInfo(title,body,href,label){$('#article-content').innerHTML=`<h1>${escapeHTML(title)}</h1><p>${escapeHTML(body)}</p><p><a class="text-link" href="${href}" target="_blank" rel="noopener">${label}</a></p>`;openDialog($('#article-dialog'));}
 $('.menu-toggle').addEventListener('click',()=>{const open=$('.site-header').classList.toggle('menu-open');$('.menu-toggle').setAttribute('aria-expanded',String(open));$('.menu-toggle').setAttribute('aria-label',open?'Close menu':'Open menu');$('.menu-toggle span').textContent=open?'−':'+';});
 $$('.site-header nav a').forEach(a=>a.addEventListener('click',()=>{$('.site-header').classList.remove('menu-open');$('.menu-toggle').setAttribute('aria-expanded','false');$('.menu-toggle').setAttribute('aria-label','Open menu');$('.menu-toggle span').textContent='+';}));
-$('#contact-form').addEventListener('submit',e=>{e.preventDefault();try{const values=Object.fromEntries(new FormData(e.target));localStorage.setItem('eclipwze-message-draft',JSON.stringify(values));$('#contact-note').textContent='Draft saved on this device. To send it, use the original website link below.';toast('Message draft saved. Nothing has been sent.');}catch{$('#contact-note').textContent='Your browser cannot save a draft. Use the original website link below to send your message.';}});
 $('#newsletter-form').addEventListener('submit',e=>{e.preventDefault();showInfo('Get on the list','Subscribe Now. Complete your signup on our original website. Your email is submitted only when you complete the original signup form.','https://eclipwze74.wixsite.com/eclipwze/blank','Continue to signup ↗');});
 let toastTimer;function toast(text){$('.toast').textContent=text;$('.toast').classList.add('visible');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('.toast').classList.remove('visible'),4000);}
 const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');let motion=!reducedMotion.matches;
@@ -66,4 +64,3 @@ function updateScroll(){
 }
 window.addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(updateScroll);ticking=true;}},{passive:true});window.addEventListener('resize',updateScroll);updateScroll();
 
-$('#clear-draft').addEventListener('click',()=>{try{localStorage.removeItem('eclipwze-message-draft');}catch{}$('#contact-form').reset();$('#contact-note').textContent='Save a draft on this device, then use the link below to send it on our original website.';toast('Draft cleared.');});
