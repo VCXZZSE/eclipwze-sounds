@@ -19,8 +19,8 @@ module.exports = async function handler(req,res){
       body:JSON.stringify({name,email,phone,enquiry,message,_subject:'New message · Eclipwze Sounds official website',_template:'table',_url:'https://eclipwze-sounds.vercel.app/'}),signal:controller.signal
     });
     const result=await response.json();
-    if(!response.ok||!(result.success===true||result.success==='true'))return res.status(502).json({error:'We couldn’t submit your message. Please try again or email us directly.'});
     if(/activat|confirm.*email|check.*email/i.test(result.message||''))return res.status(503).json({code:'CONTACT_NOT_ACTIVATED',error:'Our form is being set up. Please email eclipwze74@gmail.com directly for now.'});
+    if(!response.ok||!(result.success===true||result.success==='true')){console.warn('Contact provider rejected request:',response.status,String(result.message||'No provider message').slice(0,250));return res.status(502).json({error:'We couldn’t submit your message. Please try again or email us directly.'});}
     return res.status(200).json({success:true});
   }catch{
     return res.status(502).json({error:'We couldn’t confirm your submission. Please try again or email us directly.'});
