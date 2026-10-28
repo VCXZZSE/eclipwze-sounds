@@ -11,11 +11,11 @@
 .footer-bottom .footer-legal{justify-self:start}
 .footer-bottom .footer-links{display:flex;align-items:center;justify-content:flex-end;gap:14px}
 .footer-bottom .footer-links>a{display:inline-flex;align-items:center;min-height:44px;font-size:9px;white-space:nowrap}
-.footer-bottom .studios-link{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:42px;padding:0 18px;border:1px solid #c7cdb855;border-radius:999px;color:#e8e8d9;text-decoration:none;font-size:9px;letter-spacing:.1em;white-space:nowrap;transition:color .2s,border-color .2s,background .2s}
+.footer-bottom .studios-link{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:44px;font-size:9px;white-space:nowrap}
 .footer-bottom .band-socials{color:#c7cdb8}
 .journal-footer .band-socials{margin-top:-15px;margin-bottom:-15px;color:#58634c}
 .journal-footer{align-items:center}
 body>footer:not(.journal-footer)>.band-socials{color:inherit}
-@media(hover:hover){.band-socials .social-link:hover .social-icon{opacity:1;color:#d5805c}.footer-bottom .footer-links>a:hover{color:#d5805c}.footer-bottom .studios-link:hover{color:#f0a27b;border-color:#d5805c;background:#d5805c12}}
-@media(max-width:700px){.contact-grid.contact-compact{margin-top:28px;margin-bottom:26px}.contact-section .footer-bottom{grid-template-columns:1fr 1fr;gap:12px}.footer-bottom .studios-link{grid-column:1/-1;grid-row:1;justify-self:center;min-height:40px;padding:0 16px}.footer-bottom .footer-legal{grid-column:1;grid-row:2;align-self:center;font-size:6px;line-height:1.7}.footer-bottom .footer-links{grid-column:2;grid-row:2;justify-content:flex-end;gap:4px}.footer-bottom .footer-links>a{font-size:7px}.journal-footer .band-socials{margin:-8px 0;gap:0}.journal-footer{align-items:flex-start}}
+@media(hover:hover){.band-socials .social-link:hover .social-icon{opacity:1;color:#d5805c}.footer-bottom .footer-links>a:hover{color:#d5805c}.footer-bottom .studios-link:hover{color:#d5805c}}
+@media(max-width:700px){.contact-grid.contact-compact{margin-top:28px;margin-bottom:26px}.contact-section .footer-bottom{grid-template-columns:1fr 1fr;gap:12px}.footer-bottom .studios-link{grid-column:1/-1;grid-row:1;justify-self:center;width:auto}.footer-bottom .footer-legal{grid-column:1;grid-row:2;align-self:center;font-size:6px;line-height:1.7}.footer-bottom .footer-links{grid-column:2;grid-row:2;justify-content:flex-end;gap:4px}.footer-bottom .footer-links>a{font-size:7px}.journal-footer .band-socials{margin:-8px 0;gap:0}.journal-footer{align-items:flex-start}}
 @media(prefers-reduced-motion:reduce){.band-socials .social-icon{transition:none}}
