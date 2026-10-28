@@ -5,8 +5,8 @@ const assetURL = name => typeof EMBEDDED_ASSETS !== 'undefined' ? EMBEDDED_ASSET
 const escapeHTML = text => String(text).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const TRACKS = [
  {title:'Husn',subtitle:'Violin Cover · Anuv Jain · Repome · Dev · Instrumental [Official Visualizer]',image:'home-24-fast.webp',id:'GFWSmHqIG4w',duration:'04:27',top:true},
- {title:'Purano Sei Diner Kotha X Ami Chini Go Chini',subtitle:'[Music Video] Fusion · Violin Cover · Rabindra Sangeet',image:'home-21-fast.webp',id:'nPO5E4g3tto',duration:'03:10'},
- {title:'My Heart Will Go On X Raabta',subtitle:'ft. Naireet Bagchi · [Official Visualizer] · Medley · Eclipwze Sounds',image:'home-22-fast.webp',id:'leoEztGmsjk',duration:'04:33'},
+ {title:'Purano Sei Diner Kotha X Ami Chini Go Chini',subtitle:'[Music Video] Fusion · Violin Cover · Rabindra Sangeet',image:'home-21.jpg',id:'nPO5E4g3tto',duration:'03:10'},
+ {title:'My Heart Will Go On X Raabta',subtitle:'ft. Naireet Bagchi · [Official Visualizer] · Medley · Eclipwze Sounds',image:'home-22.jpg',id:'leoEztGmsjk',duration:'04:33'},
  {title:'Main Dhoondne Ko X Let Me Down Slowly',subtitle:'Violin cover · Repome · Dev · Instrumental Mashup',image:'home-23-fast.webp',id:'i4I3xpx4m_I',duration:'05:22'}
 ];
 $('#tracklist').innerHTML=TRACKS.map((t,i)=>`<button class="track" data-play="${t.id}" data-title="${escapeHTML(t.title)}" aria-label="Play ${escapeHTML(t.title)}"><span class="track-number">0${i+1}</span><img src="${assetURL(t.image)}" alt="${escapeHTML(t.title)} original video artwork" loading="lazy"><span><span class="track-title">${escapeHTML(t.title)}${t.top?'<span class="track-tag">TOP MUSIC RELEASE</span>':''}</span><span class="track-subtitle">${escapeHTML(t.subtitle)}</span></span><span class="track-duration">${t.duration}</span><span class="track-play" aria-hidden="true">▶</span></button>`).join('');
