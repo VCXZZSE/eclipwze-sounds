@@ -40,12 +40,13 @@
     const controller=new AbortController();
     const timeout=setTimeout(()=>controller.abort(),25000);
     try{
-      const response=await fetch('https://formsubmit.co/ajax/eclipwze74@gmail.com',{
+      const response=await fetch('/api/contact',{
         method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
         body:JSON.stringify(values),signal:controller.signal
       });
       const result=await response.json();
-      if(!response.ok||!(result.success===true||result.success==='true'))throw new Error('Submission was not accepted.');
+      if(result.code==='CONTACT_NOT_ACTIVATED')throw new Error('Our form is being set up. Please email eclipwze74@gmail.com directly for now.');
+      if(!response.ok||result.success!==true)throw new Error('We couldn’t confirm your submission. Your message is still here; try again or email us directly.');
       if(/activat|confirm.*email|check.*email/i.test(result.message||'')){
         note.dataset.state='error';note.textContent='Our form is being set up. Please email eclipwze74@gmail.com directly for now.';label.textContent='Try again';
       }else{
@@ -54,7 +55,7 @@
       }
     }catch(error){
       note.dataset.state='error';
-      note.textContent=error.name==='AbortError'?'The connection timed out. Your message is still here; try again or email us directly.':'We couldn’t confirm your submission. Your message is still here; try again or email us directly.';
+      note.textContent=error.name==='AbortError'?'The connection timed out. Your message is still here; try again or email us directly.':(error.message||'We couldn’t confirm your submission. Your message is still here; try again or email us directly.');
       label.textContent='Try sending again';
     }finally{
       clearTimeout(timeout);sending=false;button.disabled=false;form.removeAttribute('aria-busy');
