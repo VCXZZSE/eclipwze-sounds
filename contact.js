@@ -6,8 +6,9 @@
   const note=document.getElementById('contact-note');
   const button=form.querySelector('button[type="submit"]');
   const label=button.querySelector('span');
-  let sending=false;
   const directEmail=dialog.querySelector('.contact-direct a');
+  const draftKey='eclipwze-contact-pending';
+  let sending=false;
   function updateDirectEmail(){
     const values=Object.fromEntries(new FormData(form));
     const subject='Eclipwze Sounds — '+(values.enquiry||'Website enquiry');
@@ -17,59 +18,60 @@
   form.addEventListener('input',updateDirectEmail);
   form.addEventListener('change',updateDirectEmail);
   document.addEventListener('click',event=>{
-    const trigger=event.target.closest('[data-contact]');
-    if(!trigger)return;
+    if(!event.target.closest('[data-contact]'))return;
     event.preventDefault();
     if(!dialog.open)openDialog(dialog);
   });
-  // Recover a draft saved by the old contact form, without storing new messages.
-  try{
-    const draft=JSON.parse(localStorage.getItem('eclipwze-message-draft')||'null');
-    if(draft)for(const key of ['name','email','phone','message']){
-      if(typeof draft[key]==='string')form.elements[key].value=draft[key];
-    }
-  }catch{}
-  form.addEventListener('input',()=>{
-    if(!sending&&note.dataset.state==='success'){
-      note.textContent='We’ll reply to the email you provide.';
-      delete note.dataset.state;
-      label.textContent='Send your note';
-    }
-  });
-  form.addEventListener('submit',async event=>{
-    event.preventDefault();
-    if(sending||!form.reportValidity())return;
-    const values=Object.fromEntries(new FormData(form));
-    if(String(values._honey||'').trim())return;
-    if(!String(values.name||'').trim()||String(values.message||'').trim().length<10){
-      note.dataset.state='error';note.textContent='Please add your name and a message of at least 10 characters.';return;
-    }
-    sending=true;button.disabled=true;form.setAttribute('aria-busy','true');
-    delete note.dataset.state;label.textContent='Sending…';note.textContent='One moment. Sending your note…';
-    const controller=new AbortController();
-    const timeout=setTimeout(()=>controller.abort(),25000);
+  function restoreDraft(){
     try{
-      const response=await fetch('/api/contact',{
-        method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
-        body:JSON.stringify(values),signal:controller.signal
-      });
-      const result=await response.json();
-      if(result.code==='CONTACT_NOT_ACTIVATED')throw new Error('Our form is being set up. Please email eclipwze74@gmail.com directly for now.');
-      if(!response.ok||result.success!==true)throw new Error('We couldn’t confirm your submission. Your message is still here; try again or email us directly.');
-      if(/activat|confirm.*email|check.*email/i.test(result.message||'')){
-        note.dataset.state='error';note.textContent='Our form is being set up. Please email eclipwze74@gmail.com directly for now.';label.textContent='Try again';
-      }else{
-        form.reset();try{localStorage.removeItem('eclipwze-message-draft');}catch{}
-        note.dataset.state='success';note.textContent='Your note has been submitted. Thank you for reaching out!';label.textContent='Send another note';
+      const draft=JSON.parse(sessionStorage.getItem(draftKey)||localStorage.getItem('eclipwze-message-draft')||'null');
+      if(draft)for(const key of ['name','email','phone','message','enquiry']){
+        if(typeof draft[key]==='string')form.elements[key].value=draft[key];
       }
-    }catch(error){
-      note.dataset.state='error';
-      note.textContent=error.name==='AbortError'?'The connection timed out. Your message is still here; try again or email us directly.':(error.message||'We couldn’t confirm your submission. Your message is still here; try again or email us directly.');
-      updateDirectEmail();
-      note.textContent+=' The email link below includes your message.';
-      label.textContent='Try sending again';
-    }finally{
-      clearTimeout(timeout);sending=false;button.disabled=false;form.removeAttribute('aria-busy');
+    }catch{}
+    updateDirectEmail();
+  }
+  restoreDraft();
+  form.addEventListener('input',()=>{
+    if(note.dataset.state==='success'){
+      note.textContent='We’ll reply to the email you provide.';
+      delete note.dataset.state;label.textContent='Send your note';
     }
   });
+  // Submit from the visitor's browser so the provider can perform its security
+  // check. A server-to-server request is rejected by the provider's firewall.
+  form.addEventListener('submit',event=>{
+    if(sending){event.preventDefault();return;}
+    const values=Object.fromEntries(new FormData(form));
+    if(String(values._honey||'').trim()){
+      event.preventDefault();return;
+    }
+    if(!form.reportValidity()||!String(values.name||'').trim()||String(values.message||'').trim().length<10){
+      event.preventDefault();note.dataset.state='error';
+      note.textContent='Please add your name, a valid email and a message of at least 10 characters.';return;
+    }
+    try{
+      const draft={};for(const key of ['name','email','phone','message','enquiry'])draft[key]=values[key];
+      sessionStorage.setItem(draftKey,JSON.stringify(draft));
+    }catch{}
+    sending=true;button.disabled=true;label.textContent='Continue to send…';
+    note.textContent='Complete the security check if prompted. You’ll return here when your note is submitted.';
+    // Allow the form's documented native POST action. Never claim success here.
+  });
+  addEventListener('pageshow',()=>{
+    sending=false;button.disabled=false;
+    if(note.dataset.state!=='success'){
+      label.textContent='Send your note';note.textContent='We’ll reply to the email you provide.';
+    }
+  });
+  const url=new URL(location.href);
+  if(url.searchParams.get('contact')==='submitted'){
+    form.reset();
+    try{sessionStorage.removeItem(draftKey);localStorage.removeItem('eclipwze-message-draft');}catch{}
+    updateDirectEmail();note.dataset.state='success';
+    note.textContent='Thank you! Your note has been submitted. We’ll reply to the email you provided.';
+    label.textContent='Send another note';
+    url.searchParams.delete('contact');history.replaceState(null,'',url.pathname+url.search+url.hash);
+    if(!dialog.open)openDialog(dialog);
+  }
 })();
