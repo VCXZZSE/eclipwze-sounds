@@ -1,0 +1,13 @@
+/* A quiet, thumb-sized motion switch for the phone header. */
+@media(max-width:700px){
+ .site-header .header-right{gap:10px}
+ .site-header .motion-toggle{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:79px;width:auto;height:44px;min-height:44px;padding:0 5px;border:0;border-radius:0;background:transparent;font-size:10px;font-weight:500;letter-spacing:0;color:#474b3e;white-space:nowrap}
+ .site-header .motion-toggle:before{content:none;display:none}
+ .site-header .motion-toggle>span{position:relative;display:block;width:25px;height:15px;flex:none;margin:0;padding:0;border:1px solid #7c896a;border-radius:20px;background:#7c896a;font-size:0;line-height:0;transition:background .2s,border-color .2s}
+ .site-header .motion-toggle>span:before{content:'';position:absolute;left:13px;top:3px;width:7px;height:7px;border-radius:50%;background:#f1eddf;transition:left .2s,background .2s;box-shadow:0 1px 2px #25271f20}
+ .site-header .motion-toggle[aria-pressed=true]>span{background:transparent;border-color:#a4a694}
+ .site-header .motion-toggle[aria-pressed=true]>span:before{left:3px;background:#929682}
+ .site-header .motion-toggle:focus-visible{outline:2px solid #b4482d;outline-offset:2px;border-radius:4px}
+}
+@media(max-width:360px){.site-header .header-right{gap:7px}.site-header .motion-toggle{min-width:73px;font-size:9px;gap:6px}.site-header .brand{width:96px}}
+@media(prefers-reduced-motion:reduce){.site-header .motion-toggle>span,.site-header .motion-toggle>span:before{transition:none}}

@@ -1,0 +1,119 @@
+/* Phone-only fixes: readable collaborator ink and an uncompressed record player. */
+@media(max-width:700px){
+ .collaborators-section{background:#d9ddc8;color:#252c20}
+ .collaborators-section .section-top{color:#48553b}
+ .collaborators-section h2,.collaborators-section h2 .flow-word{color:#252c20}
+ .collaborators-section h2 em,.collaborators-section h2 em .flow-word{color:#9b3f27}
+ .collaborators-section .collaborator-caption h3{color:#252c20;font-weight:500}
+ .collaborators-section .collaborator summary>.collaborator-role{color:#48553b;opacity:1;font-size:10px;line-height:1.7;letter-spacing:.1em}
+ .collaborators-section .collaborator-plus,.collaborators-section .collaborator[open] .collaborator-plus{background:#c0cba5;color:#26341f;border-color:#6c7d53;font-weight:500}
+ .collaborators-section .collaborator-body{padding-top:25px;color:#2e3827}
+ .collaborators-section .collaborator-body p{color:#2e3827;opacity:1;font-size:15px;line-height:1.85;max-width:none}
+ .collaborators-section .collaborator-body a{color:#81351f;font-size:13px;font-weight:500;min-height:48px;line-height:1.7;overflow-wrap:anywhere}
+ .collaborators-section .collaborator-body .service-icon{filter:brightness(.18)}
+ .collaborators-section .collaborator:nth-child(n){margin-bottom:32px;padding-bottom:30px;border-bottom-color:#8b9777}
+ .collaborators-section .collaborator-caption{gap:14px}
+ .collaborators-section .collaborator-caption .collaborator-plus{width:44px;height:44px;flex:none}
+ .music-section .record-scroll-story{height:auto;min-height:0;margin-bottom:52px}
+ .music-section .record-sticky{position:relative;top:auto;height:auto;min-height:0;display:flex;flex-direction:column;gap:0;padding:16px 0 0}
+ .music-section .record-browser-top{order:0;min-height:32px;padding:0 0 14px;align-items:center}
+ .music-section .record-browser-top>.eyebrow{font-size:8px;line-height:1.6;white-space:normal;max-width:none}
+ .music-section .record-layout{display:contents}
+ .music-section .record-stage{order:1;flex:none;height:clamp(265px,78vw,350px);min-height:0;margin-top:8px;margin-bottom:6px}
+ .music-section .printed-record{width:min(64vw,280px);top:49%;left:50%}
+ .music-section .record-navigation{order:2;justify-content:center;gap:28px;padding:18px 0 22px;margin:0;border-bottom:1px solid #eeeade38}
+ .music-section .record-navigation>button{width:48px;height:48px;border-color:#b3baa7;border-radius:5px;font-size:23px}
+ .music-section .record-count{min-width:64px;text-align:center;font-size:18px;color:#f1eddf}
+ .music-section .record-count>span{font-size:11px;color:#c2c8b7}
+ .music-section .record-details{order:3;width:100%;min-height:0;height:auto;align-self:auto;padding:30px 0 0;pointer-events:none}
+ .music-section .record-release-tag{font-size:9px;line-height:1.75;letter-spacing:.12em;color:#f2a17e;max-width:none}
+ .music-section .record-title{font-size:35px;line-height:1.08;letter-spacing:-.04em;margin:19px 0 20px;max-width:none;color:#f1eddf}
+ .music-section .record-scroll-story[data-long=true] .record-title{font-size:31px;line-height:1.12;max-width:none}
+ .music-section .record-credit{font-size:14px;line-height:1.75;min-height:0;max-width:none;color:#c8cebd}
+ .music-section .record-facts{margin:27px 0 24px;padding:14px 0;font-size:10px;line-height:1.5;max-width:none;color:#c8cebd}
+ .music-section .record-actions{display:grid;grid-template-columns:1fr;gap:16px;width:100%;align-items:stretch}
+ .music-section .record-actions .record-play{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:56px;font-size:13px;line-height:1.4;padding:17px 22px;border-radius:5px}
+ .music-section .record-actions .record-play .service-icon{width:20px;height:20px;margin-right:0}
+ .music-section .record-stream{display:flex;align-items:center;justify-content:flex-start;gap:10px;min-height:52px;width:100%;padding:10px 3px 14px;font-size:13px;line-height:1.5;color:#f1eddf;border-bottom:1px solid #eeeade50}
+ .music-section .record-stream .service-icon{width:21px;height:21px;margin:0}
+ .music-section .record-score{order:4;margin:30px 0 40px;height:2px}
+ .music-section .record-index,.music-section .record-nav-note,.music-section .record-stage-caption{display:none}
+}
+@media(max-width:360px){
+ .music-section .record-title{font-size:32px}
+ .music-section .record-scroll-story[data-long=true] .record-title{font-size:28px}
+ .collaborators-section .collaborator summary>.collaborator-role{font-size:9px}
+}
+/* Restore the scroll-driven CD sequence, with a dedicated transport row. */
+@media(max-width:700px){
+ .music-section .record-scroll-story{height:450svh;min-height:0}
+ .music-section .record-sticky{position:sticky;top:min(76px,calc(100svh - 650px));height:calc(100svh - 76px);min-height:650px;display:grid;grid-template-columns:1fr;grid-template-rows:24px minmax(150px,1fr) 68px auto 2px;padding:0;gap:0}
+ .music-section .record-browser-top{grid-row:1;order:0;min-height:0;padding:0;align-items:center}
+ .music-section .record-stage{grid-row:2;order:1;height:100%;min-height:0;margin-top:0;margin-bottom:0}
+ .music-section .printed-record{height:82%;width:auto;max-height:270px;aspect-ratio:1;top:49%;left:50%}
+ .music-section .record-navigation{grid-row:3;order:2;min-height:68px;padding:10px 0 12px;gap:28px}
+ .music-section .record-navigation>button{width:46px;height:46px}
+ .music-section .record-details{grid-row:4;order:3;min-height:0;padding:16px 0 12px}
+ .music-section .record-release-tag{font-size:8px;line-height:1.7}
+ .music-section .record-title{font-size:32px;line-height:1.08;margin:14px 0}
+ .music-section .record-scroll-story[data-long=true] .record-title{font-size:28px;line-height:1.1}
+ .music-section .record-credit{font-size:13px;line-height:1.65}
+ .music-section .record-facts{margin:16px 0 18px;padding:8px 0;font-size:9px;line-height:1.7}
+ .music-section .record-actions{display:flex;flex-wrap:nowrap;gap:18px;align-items:center}
+ .music-section .record-actions .record-play{flex:1.4;min-width:0;width:auto;min-height:52px;font-size:11px;padding:14px 15px;gap:10px}
+ .music-section .record-actions .record-play .service-icon{width:18px;height:18px;flex:none}
+ .music-section .record-stream{flex:1;min-width:0;width:auto;min-height:52px;padding:10px 0;font-size:12px;gap:8px}
+ .music-section .record-stream .service-icon{width:19px;height:19px;flex:none}
+ .music-section .record-score{grid-row:5;order:4;margin:0;height:2px}
+}
+@media(max-width:360px){.music-section .record-actions{gap:14px}.music-section .record-actions .record-play{font-size:10px;padding-inline:12px;gap:7px}.music-section .record-stream{font-size:11px}.music-section .record-scroll-story[data-long=true] .record-title{font-size:26px}}
+
+@media(max-width:700px){
+ .site-header{transition:transform .32s cubic-bezier(.2,.75,.2,1),opacity .22s ease;will-change:transform}
+ .site-header.record-scrolling{transform:translateY(-105%);opacity:0;pointer-events:none}
+ .reading-progress{transition:top .32s ease,height .32s ease;z-index:60}
+ .reading-progress.record-progress-only{top:0;height:3px;opacity:1}
+}
+@media(prefers-reduced-motion:reduce){@media(max-width:700px){.site-header{transition:none}.reading-progress{transition:none}}}
+
+/* Keep the artist portraits square on phones; the tilted zine frame remains outside the image. */
+@media(max-width:700px){
+ .duo-workstation .duo-deck{transform:none!important}
+ .duo-workstation .duo-pane .duo-photo,
+ .duo-workstation .duo-pane .duo-photo img,
+ .duo-workstation .duo-pane .duo-portrait-crop{transform:none!important}
+}
+
+/* Keep the phone navigation reachable above scroll scenes. */
+@media(max-width:700px){
+ .site-header.menu-open,.site-header.record-scrolling.menu-open{transform:translateY(0)!important;opacity:1!important;pointer-events:auto!important;z-index:1000}
+ .site-header.menu-open nav{position:fixed;inset:76px 0 0;z-index:1001;display:flex!important;visibility:visible;opacity:1;pointer-events:auto;touch-action:pan-y;background:#eeeade}
+ .site-header.menu-open .menu-toggle{position:relative;z-index:1002;min-height:48px;touch-action:manipulation}
+}
+
+/* The menu must size against the viewport, not the animated header. */
+@media(max-width:700px){
+ .site-header.menu-open,.site-header.record-scrolling.menu-open{
+  transform:none!important;will-change:auto;backdrop-filter:none;overflow:visible;
+ }
+ .site-header.menu-open nav{
+  position:absolute!important;inset:auto!important;top:100%!important;left:0!important;right:0!important;bottom:auto!important;
+  width:100%;height:calc(100vh - 76px);height:calc(100dvh - 76px);
+  min-height:0;max-height:none!important;overflow-x:hidden;overflow-y:auto;
+  display:flex!important;flex-direction:column;align-items:stretch;justify-content:flex-start;
+  padding:22px 7vw calc(28px + env(safe-area-inset-bottom));gap:0;
+  background:#eeeade;color:#20211c;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
+ }
+ .site-header.menu-open nav a{
+  flex:0 0 auto;min-height:68px;width:100%;color:#20211c;opacity:1;visibility:visible;
+ }
+}
+
+/* Give the music introduction a clear title, caption, and next section rhythm. */
+@media(max-width:700px){
+ .music-section>.section-top{margin-bottom:38px}
+ .music-section>.section-title{display:flex;flex-direction:column;align-items:flex-start;gap:28px;margin:0 0 40px}
+ .music-section>.section-title h2{font-size:clamp(48px,14.2vw,62px);line-height:1.12;letter-spacing:-.045em;margin:0;max-width:100%}
+ .music-section>.section-title h2 em{display:block;margin:8px 0 0;line-height:1.12}
+ .music-section>.section-title>.eyebrow{display:block;margin:0;max-width:none;font-size:10px;line-height:1.85;letter-spacing:.1em;text-align:left;color:#c8cebd}
+}

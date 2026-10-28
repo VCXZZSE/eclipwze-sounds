@@ -10,9 +10,9 @@ $('#collaborator-list').innerHTML=COLLABORATORS.map((c,i)=>`<details class="coll
 $$('.album-art').forEach((art,i)=>{const n=document.createElement('span');n.className='album-sleeve-number';n.textContent='ECLIPWZE / 00'+(i+1);art.append(n);});
 // Preserve exact original founder biographies; the mixer chooses which one is in focus.
 const duoCopy=[
- {title:'SIDE A / VIOLIN / FOUNDER',body:'Repome Roy Mondal is a Kolkata based versatile violinist currently working for his own built band The Eclipwze Sounds with his co partner Deb Banerjee'},
+ {title:'SIDE A / VIOLIN / FOUNDER',body:'Repome Roy Mondal is a versatile violinist based in Kolkata. He founded Eclipwze Sounds and continues to build its sound alongside his partner, Deb Banerjee.'},
  {title:'IN STEREO / ECLIPWZE SOUNDS',body:'One of us with a violin, the other with a guitar. Ideas turned into riffs, riffs into recordings.'},
- {title:'SIDE B / GUITAR & PRODUCTION / CO-FOUNDER',body:'Deb Banerjee currently serves as both a guitarist and a music producer and engineer at Eclipwze Sounds. He co-founded Eclipwze Sounds, an emerging venture originating from Kolkata, alongside Repome Roy Mondal.'}
+ {title:'SIDE B / GUITAR & PRODUCTION / CO-FOUNDER',body:'Deb Banerjee is a guitarist, music producer, and engineer at Eclipwze Sounds. He co-founded the Kolkata-based band alongside Repome Roy Mondal.'}
 ];
 // Two layers let the Bengali initial fill with the same light as its portrait.
 $$('.duo-bengali').forEach(letter=>{
@@ -26,7 +26,7 @@ mixDuo(50);
 // Portrait buttons respond to keyboard, taps and hover. No hover-only content.
 $$('.collaborator').forEach(details=>details.addEventListener('toggle',()=>{if(details.open)$$('.collaborator').filter(other=>other!==details).forEach(other=>other.open=false);}));
 platformIcons();document.addEventListener('click',()=>queueMicrotask(()=>platformIcons()));
-$$('.sprite-window>img').forEach(img=>{img.classList.add('action-pose');const idle=document.createElement('img');idle.src=assetURL('duo.png');idle.alt='';idle.setAttribute('aria-hidden','true');idle.className='standing-pose';img.after(idle);});
+$$('.sprite-window>img').forEach(img=>{img.classList.add('action-pose');const idle=document.createElement('img');idle.src=assetURL('duo-fast.webp');idle.alt='';idle.setAttribute('aria-hidden','true');idle.className='standing-pose';img.after(idle);});
 const clamp=(n,min=0,max=1)=>Math.min(max,Math.max(min,n));
 const stuntKeys=[
  {at:0,x:-.54,y:.19,r:-28,o:0},{at:.16,x:-.29,y:.09,r:-12,o:1},

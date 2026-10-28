@@ -78,3 +78,5 @@ html,body{overflow-x:clip}body{width:100%}.duo-note-heading>h3{overflow-wrap:any
 .duo-portrait-crop{position:absolute;inset:0;overflow:hidden}
 .duo-workstation .duo-pane-deb .duo-portrait-crop img{top:5%;left:-40%;width:180%;height:150%;max-width:none;object-fit:contain;object-position:center top}
 @media(max-width:700px){.duo-workstation .duo-pane-deb .duo-portrait-crop img{top:14%;left:-30%;width:160%}}
+/* Exclude the neighboring violin scroll from Dev's standing sprite only. */
+.sprite-right .standing-pose{clip-path:polygon(54% 0,100% 0,100% 100%,50% 100%,50% 44%,54% 44%)}
