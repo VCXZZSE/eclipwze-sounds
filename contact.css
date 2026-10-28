@@ -1,33 +1,86 @@
-#contact-dialog{width:960px;padding:0;border:1px solid #c7c8b6;border-radius:12px;background:#f5f0e4;color:#22352b;max-height:calc(100dvh - 48px);overflow:auto;box-shadow:0 24px 110px #0007}
-#contact-dialog::backdrop{background:#122219c9;backdrop-filter:blur(8px)}
-#contact-dialog .dialog-top{margin:0;padding:17px 28px;border-bottom:1px solid #c9ccba;gap:20px;position:sticky;top:0;z-index:2;background:#f5f0e4}
-#contact-dialog .dialog-top .eyebrow{font-size:9px;letter-spacing:.16em}
-#contact-dialog .dialog-close{font-size:11px;min-height:40px;display:flex;align-items:center;gap:14px;padding:0 4px}
+/* Record-sleeve postbox. All styles stay within the contact dialog. */
+#contact-dialog{--ink:#23372d;--rust:#a73f29;--paper:#f7f1e4;font:14px/1.6 var(--sans,Arial,sans-serif)}
+#contact-dialog .dialog-top{margin:0}
+#contact-dialog, #contact-dialog *{box-sizing:border-box}
+#contact-dialog button,#contact-dialog input,#contact-dialog select,#contact-dialog textarea{font:inherit}
+#contact-dialog button{cursor:pointer;background:none;border:0;color:inherit}
+#contact-dialog a{color:inherit}
+#contact-dialog p,#contact-dialog h2{margin:0}
+#contact-dialog{width:920px;max-width:calc(100% - 24px);max-height:calc(100dvh - 24px);margin:auto;padding:0;background:var(--paper);color:var(--ink);border:1px solid var(--ink);border-radius:2px;box-shadow:7px 7px 0 #14261d66,0 24px 100px #0006;overflow:auto}
+#contact-dialog::backdrop{background:#122219c9;backdrop-filter:blur(6px)}
+#contact-dialog .dialog-top{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:9px 24px;border-bottom:1px solid #23372d40;position:sticky;top:0;z-index:2;background:var(--paper)}
+#contact-dialog .eyebrow{font-size:9px;letter-spacing:.12em;color:var(--rust)}
+#contact-dialog .dialog-close{min-height:44px;font-size:11px;display:flex;align-items:center;gap:14px}
 #contact-dialog .dialog-close span{font-size:27px;font-weight:300}
-#contact-dialog .contact-layout{display:grid;grid-template-columns:.85fr 1.3fr}
-#contact-dialog .contact-intro{background:#dce2c9;padding:32px;display:flex;flex-direction:column;border-right:1px solid #c3cbb1}
-#contact-dialog .contact-star{font-size:40px;line-height:1;color:#b34c2e;margin-bottom:28px}
-#contact-dialog h2{font-family:var(--serif,Georgia,serif);font-size:clamp(42px,4.8vw,65px);font-weight:500;letter-spacing:-.055em;line-height:1.04;margin:0 0 22px}
-#contact-dialog h2 em{color:#a2462c}
-#contact-dialog .contact-intro>p{font-size:13px;line-height:1.9;color:#435341;max-width:26ch}
-#contact-dialog .contact-signoff{padding-top:50px;margin-top:auto;display:grid;gap:6px;font-size:11px;letter-spacing:.12em}
-#contact-dialog .contact-signoff small{font-size:8px;letter-spacing:.09em;color:#53634b}
-#contact-dialog .contact-compose{padding:32px}
-#contact-dialog form{display:grid;grid-template-columns:1fr 1fr;gap:22px 20px;margin:0}
-#contact-dialog label{font-size:11px;font-weight:500;color:#293c2d;display:block;grid-column:auto}
-#contact-dialog label.wide,#contact-dialog .wide{grid-column:1/-1}
-#contact-dialog input:not([type="hidden"]),#contact-dialog select,#contact-dialog textarea{display:block;width:100%;margin-top:8px;background:#fffdf5;border:1px solid #b7c0ab;border-radius:5px;font-size:13px;color:#213229;padding:12px;min-height:46px;line-height:1.5}
-#contact-dialog input::placeholder,#contact-dialog textarea::placeholder{color:#73796d;opacity:1}
-#contact-dialog textarea{min-height:120px;resize:vertical;max-height:260px}
-#contact-dialog .contact-optional{font-size:10px;color:#69725f;font-weight:400}
-#contact-dialog .contact-send{background:#253c2c;color:#f6f1e5;border-radius:6px;display:flex;align-items:center;justify-content:space-between;padding:15px 20px;min-height:52px;font-size:13px;transition:background .2s;gap:16px}
-#contact-dialog .contact-send:hover{background:#a2472b}
-#contact-dialog .contact-send:disabled{cursor:wait;opacity:.7}
-#contact-dialog .contact-send>span:last-child{font-size:22px;line-height:1}
-#contact-dialog .form-note{color:#52624c;font-size:11px;line-height:1.65;margin: -9px 0 0;min-height:18px}
-#contact-dialog .form-note[data-state="error"]{color:#a02d24}
-#contact-dialog .form-note[data-state="success"]{color:#245839;font-weight:600}
-#contact-dialog .contact-direct{border-top:1px solid #d1d3c1;padding-top:17px;margin-top:22px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:7px;font-size:11px;color:#63705b}
-#contact-dialog .contact-direct a{color:#2b412e;text-decoration:underline;text-underline-offset:4px;overflow-wrap:anywhere}
-#contact-dialog .contact-honey{display:none!important}
-@media(max-width:700px){#contact-dialog{max-width:calc(100% - 24px);max-height:calc(100dvh - 24px);border-radius:10px}#contact-dialog .dialog-top{padding:10px 20px}#contact-dialog .dialog-top .eyebrow{font-size:8px}#contact-dialog .contact-layout{grid-template-columns:1fr}#contact-dialog .contact-intro{padding:23px 24px;position:relative;border-right:0;border-bottom:1px solid #c3cbb1}#contact-dialog h2{font-size:42px;margin:0 0 10px;max-width:85%}#contact-dialog h2 br{display:none}#contact-dialog .contact-star{position:absolute;right:23px;top:26px;font-size:30px;margin:0}#contact-dialog .contact-intro>p{font-size:12px;max-width:34ch;line-height:1.7}#contact-dialog .contact-signoff{display:none}#contact-dialog .contact-compose{padding:24px}#contact-dialog form{gap:20px;grid-template-columns:1fr}#contact-dialog label{grid-column:1/-1;font-size:12px}#contact-dialog input:not([type="hidden"]),#contact-dialog select,#contact-dialog textarea{font-size:16px;min-height:50px}#contact-dialog textarea{min-height:125px}#contact-dialog .contact-direct{font-size:11px}#contact-dialog .contact-send{min-height:54px;font-size:14px}}
+#contact-dialog .contact-layout{display:grid;grid-template-columns:.82fr 1.3fr}
+#contact-dialog .contact-intro{background:#e9c8a7;padding:32px 30px;display:flex;flex-direction:column;border-right:1px dashed #6a493a80;position:relative;overflow:hidden}
+#contact-dialog .contact-kicker{font-size:9px;letter-spacing:.13em;font-weight:600;margin-bottom:24px}
+#contact-dialog h2{font:500 clamp(52px,5.5vw,74px)/.97 var(--serif);letter-spacing:-.055em;margin:0 0 23px;position:relative;z-index:1}
+#contact-dialog h2 em{color:var(--rust)}
+#contact-dialog .contact-intro>p{font-size:13px;line-height:1.8;color:#384738;max-width:28ch;position:relative;z-index:1}
+#contact-dialog .contact-record{position:relative;width:190px;aspect-ratio:1;margin:30px auto 20px;border-radius:50%;background:repeating-radial-gradient(circle at center,#22342c 0 2px,#526052 3px,#22342c 4px 6px);border:5px solid #203329;box-shadow:6px 8px 0 #22372b20;transform:rotate(-12deg);display:grid;place-items:center;flex-shrink:0}
+#contact-dialog .contact-record:after{content:'';position:absolute;inset:7px;border-radius:50%;background:conic-gradient(transparent 30deg,#fff2 60deg,transparent 95deg,transparent 210deg,#fff2 240deg,transparent 275deg);pointer-events:none}
+#contact-dialog .contact-record-label{border-radius:50%;width:96px;height:96px;background:#b5462d;color:#fff2df;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:5px;text-align:center;position:relative;z-index:1}
+#contact-dialog .contact-record-label small{font:8px Arial,sans-serif;letter-spacing:.12em}
+#contact-dialog .contact-record-label b{font:italic 18px/.95 var(--serif);letter-spacing:-.03em}
+#contact-dialog .contact-record-label i{width:9px;height:9px;border-radius:50%;background:#e9c8a7;border:2px solid #203329}
+#contact-dialog .contact-record-note{position:absolute;right:-22px;top:1px;font:italic 53px Georgia,serif;color:var(--rust);transform:rotate(20deg)}
+#contact-dialog .contact-signoff{padding-top:14px;margin-top:auto;display:grid;gap:9px}
+#contact-dialog .contact-signoff>span{font:italic 27px var(--serif);color:var(--rust);transform:rotate(-3deg);transform-origin:left center}
+#contact-dialog .contact-signoff small{font-size:8px;letter-spacing:.1em;line-height:1.8}
+#contact-dialog .contact-compose{padding:27px 30px 24px;min-width:0}
+#contact-dialog .contact-compose-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:25px}
+#contact-dialog .contact-stamp{border:1px solid var(--rust);color:var(--rust);padding:6px 9px;font-size:9px;letter-spacing:.09em;transform:rotate(-2deg)}
+#contact-dialog .contact-compose-top>span:last-child{font-size:26px;color:var(--rust)}
+#contact-dialog form{display:grid;grid-template-columns:1fr 1fr;gap:20px 18px;margin:0}
+#contact-dialog label{font-size:11px;font-weight:600;display:block;min-width:0}
+#contact-dialog .wide{grid-column:1/-1}
+#contact-dialog input,#contact-dialog select,#contact-dialog textarea{display:block;width:100%;margin-top:8px;background:#fffcf4;border:0;border-bottom:1px solid #7a806c;border-radius:0;font-size:14px;color:var(--ink);padding:11px 10px;min-height:46px;line-height:1.5}
+#contact-dialog input::placeholder,#contact-dialog textarea::placeholder{color:#6d7468;opacity:1}
+#contact-dialog textarea{min-height:116px;resize:vertical;max-height:260px;background:repeating-linear-gradient(#fffcf4 0 28px,#23372d10 28px 29px);line-height:29px;padding-top:4px}
+#contact-dialog .contact-optional,#contact-dialog .contact-required{display:block;font-size:9px;color:#5f6a59;font-weight:400;margin-top:2px}
+#contact-dialog .contact-send{background:var(--rust);color:#fff7e8;border:1px solid var(--rust);border-radius:2px;box-shadow:3px 3px 0 #23372d;display:flex;align-items:center;justify-content:space-between;padding:13px 18px;min-height:52px;font-size:14px;gap:16px}
+#contact-dialog .contact-send:hover{background:#85331f}
+#contact-dialog .contact-send:active{transform:translate(2px,2px);box-shadow:1px 1px 0 #23372d}
+#contact-dialog .contact-send>span:last-child{font-size:25px;line-height:1}
+#contact-dialog .form-note{color:#52624c;font-size:11px;line-height:1.65;margin:-7px 0 0;min-height:18px}
+#contact-dialog .form-note[data-state=error]{color:#a02d24}
+#contact-dialog .contact-gmail-link{font-size:12px;color:#294331;text-decoration:underline;text-underline-offset:4px;margin-top:-8px;justify-self:start}
+#contact-dialog [hidden]{display:none!important}
+#contact-dialog .contact-preview{border-top:1px dashed #85917c;border-bottom:1px dashed #85917c;min-width:0}
+#contact-dialog .contact-preview summary{cursor:pointer;font-size:11px;padding:12px 0;display:flex;justify-content:space-between;gap:15px;list-style:none}
+#contact-dialog .contact-preview summary::-webkit-details-marker{display:none}
+#contact-dialog .contact-preview[open] summary span{transform:rotate(45deg)}
+#contact-dialog .contact-preview strong{display:block;font-size:12px;overflow-wrap:anywhere;border-top:1px solid #d4d9c8;padding-top:14px}
+#contact-dialog .contact-preview pre{font:12px/1.8 Arial,sans-serif;white-space:pre-wrap;overflow-wrap:anywhere;margin:15px 0;max-height:260px;overflow:auto;color:#43523b}
+#contact-dialog .contact-direct{padding-top:15px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:7px;font-size:10px;color:#52624c}
+#contact-dialog .contact-direct a{text-decoration:underline;text-underline-offset:4px;overflow-wrap:anywhere}
+#contact-dialog :is(button,a,input,select,textarea,summary):focus-visible{outline:2px solid var(--rust);outline-offset:4px}
+@media(max-width:700px){#contact-dialog .dialog-top{padding:6px 20px}
+#contact-dialog .dialog-top .eyebrow{font-size:8px}
+#contact-dialog .contact-layout{grid-template-columns:1fr}
+#contact-dialog .contact-intro{padding:23px 22px 25px;border-right:0;border-bottom:1px dashed #6a493a80;min-height:200px;display:block}
+#contact-dialog .contact-kicker{display:block;margin-bottom:13px;font-size:8px}
+#contact-dialog h2{font-size:49px;max-width:70%;margin:0 0 12px}
+#contact-dialog h2 br{display:none}
+#contact-dialog .contact-intro>p{font-size:12px;max-width:24ch;line-height:1.7}
+#contact-dialog .contact-record{position:absolute;width:119px;right:-25px;bottom:12px;margin:0}
+#contact-dialog .contact-record-label{width:62px;height:62px;gap:3px}
+#contact-dialog .contact-record-label small{font-size:6px}
+#contact-dialog .contact-record-label b{font-size:13px}
+#contact-dialog .contact-record-label i{width:7px;height:7px}
+#contact-dialog .contact-record-note{font-size:30px;right:13px;top:-28px}
+#contact-dialog .contact-signoff{display:none}
+#contact-dialog .contact-compose{padding:23px 22px}
+#contact-dialog .contact-compose-top{margin-bottom:23px}
+#contact-dialog form{gap:20px;grid-template-columns:1fr}
+#contact-dialog label{grid-column:1/-1;font-size:12px}
+#contact-dialog .contact-required,#contact-dialog .contact-optional{display:inline;margin-left:4px}
+#contact-dialog input,#contact-dialog select,#contact-dialog textarea{font-size:16px;min-height:50px}
+#contact-dialog textarea{min-height:121px}
+#contact-dialog .contact-send{min-height:54px;font-size:15px}}
+@media(max-width:360px){#contact-dialog h2{font-size:43px}
+#contact-dialog .contact-intro>p{max-width:21ch}
+#contact-dialog .contact-record{right:-41px}
+#contact-dialog .dialog-top{padding-inline:16px}
+#contact-dialog .contact-compose{padding-inline:18px}}

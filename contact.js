@@ -2,76 +2,97 @@
   'use strict';
   const dialog=document.getElementById('contact-dialog');
   const form=document.getElementById('contact-form');
-  if(!dialog||!form)return;
+  const drafts=window.EclipwzeContactDrafts;
+  if(!dialog||!form||!drafts)return;
   const note=document.getElementById('contact-note');
-  const button=form.querySelector('button[type="submit"]');
-  const label=button.querySelector('span');
-  const directEmail=dialog.querySelector('.contact-direct a');
+  const query=form.elements.enquiry;
+  const message=form.elements.message;
+  const gmailLink=document.getElementById('contact-gmail-link');
+  const emailLink=dialog.querySelector('.contact-direct a');
+  const subjectPreview=document.getElementById('contact-subject-preview');
+  const bodyPreview=document.getElementById('contact-body-preview');
   const draftKey='eclipwze-contact-pending';
-  let sending=false;
-  function updateDirectEmail(){
-    const values=Object.fromEntries(new FormData(form));
-    const subject='Eclipwze Sounds — '+(values.enquiry||'Website enquiry');
-    const body='Name: '+(values.name||'')+'\nEmail: '+(values.email||'')+'\nPhone: '+(values.phone||'')+'\n\n'+(values.message||'');
-    directEmail.href='mailto:eclipwze74@gmail.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+  const idleNote='Gmail opens with your draft. Review it and press Send there.';
+  let currentDraft=null;
+  function values(){return Object.fromEntries(new FormData(form));}
+  function updatePreview(){
+    const preset=drafts.presets[query.value];
+    message.placeholder=preset?preset[4]:'Choose a query type, then tell us what’s on your mind…';
+    if(!preset){
+      currentDraft=null;
+      subjectPreview.textContent='Choose a query type to see your email.';
+      bodyPreview.textContent='Your name, contact details, and message will appear here.';
+      gmailLink.hidden=true;emailLink.href='mailto:eclipwze74@gmail.com';
+      return;
+    }
+    currentDraft=drafts.buildDraft(values());
+    subjectPreview.textContent=currentDraft.subject;
+    bodyPreview.textContent=currentDraft.body;
+    emailLink.href=currentDraft.mailto;
+    gmailLink.hidden=!form.checkValidity();
+    if(!gmailLink.hidden)gmailLink.href=currentDraft.gmail;
   }
-  form.addEventListener('input',updateDirectEmail);
-  form.addEventListener('change',updateDirectEmail);
+  function rememberDraft(){
+    try{sessionStorage.setItem(draftKey,JSON.stringify(values()));}catch{}
+  }
+  function validate(){
+    form.elements.name.setCustomValidity(form.elements.name.value.trim()?'':'Please enter your name.');
+    message.setCustomValidity(message.value.trim().length>=10?'':'Please write a message of at least 10 characters.');
+    return form.reportValidity();
+  }
+  form.addEventListener('input',()=>{
+    form.elements.name.setCustomValidity('');message.setCustomValidity('');
+    note.textContent=idleNote;delete note.dataset.state;updatePreview();
+  });
+  form.addEventListener('change',updatePreview);
   document.addEventListener('click',event=>{
     if(!event.target.closest('[data-contact]'))return;
-    event.preventDefault();
-    if(!dialog.open)openDialog(dialog);
+    event.preventDefault();if(!dialog.open)openDialog(dialog);
   });
-  function restoreDraft(){
-    try{
-      const draft=JSON.parse(sessionStorage.getItem(draftKey)||localStorage.getItem('eclipwze-message-draft')||'null');
-      if(draft)for(const key of ['name','email','phone','message','enquiry']){
-        if(typeof draft[key]==='string')form.elements[key].value=draft[key];
+  try{
+    const stored=JSON.parse(sessionStorage.getItem(draftKey)||localStorage.getItem('eclipwze-message-draft')||'null');
+    if(stored)for(const key of ['name','email','phone','message','enquiry']){
+      if(typeof stored[key]==='string'&&form.elements[key]){
+        if(key!=='enquiry'||drafts.presets[stored[key]])form.elements[key].value=stored[key];
       }
-    }catch{}
-    updateDirectEmail();
-  }
-  restoreDraft();
-  form.addEventListener('input',()=>{
-    if(note.dataset.state==='success'){
-      note.textContent='We’ll reply to the email you provide.';
-      delete note.dataset.state;label.textContent='Send your note';
     }
-  });
-  // Submit from the visitor's browser so the provider can perform its security
-  // check. A server-to-server request is rejected by the provider's firewall.
+  }catch{}
   form.addEventListener('submit',event=>{
-    if(sending){event.preventDefault();return;}
-    const values=Object.fromEntries(new FormData(form));
-    if(String(values._honey||'').trim()){
-      event.preventDefault();return;
+    event.preventDefault();
+    if(!validate())return;
+    updatePreview();rememberDraft();
+    if(!currentDraft)return;
+    // Open synchronously with the visitor's click: no request or security queue.
+    const opened=window.open(currentDraft.gmail,'_blank');
+    if(opened){
+      try{opened.opener=null;}catch{}
+      note.textContent='Continue in Gmail to review and send your note. Your form is kept here.';
+      note.dataset.state='ready';
+    }else{
+      note.textContent='Your browser blocked the new tab. Use “Open Gmail draft” below, or use your email app.';
+      note.dataset.state='error';
     }
-    if(!form.reportValidity()||!String(values.name||'').trim()||String(values.message||'').trim().length<10){
-      event.preventDefault();note.dataset.state='error';
-      note.textContent='Please add your name, a valid email and a message of at least 10 characters.';return;
-    }
-    try{
-      const draft={};for(const key of ['name','email','phone','message','enquiry'])draft[key]=values[key];
-      sessionStorage.setItem(draftKey,JSON.stringify(draft));
-    }catch{}
-    sending=true;button.disabled=true;label.textContent='Continue to send…';
-    note.textContent='Complete the security check if prompted. You’ll return here when your note is submitted.';
-    // Allow the form's documented native POST action. Never claim success here.
   });
-  addEventListener('pageshow',()=>{
-    sending=false;button.disabled=false;
-    if(note.dataset.state!=='success'){
-      label.textContent='Send your note';note.textContent='We’ll reply to the email you provide.';
+  form.addEventListener('keydown',event=>{
+    if(event.key==='Enter'&&(event.ctrlKey||event.metaKey)){
+      event.preventDefault();form.requestSubmit();
     }
+  });
+  gmailLink.addEventListener('click',event=>{
+    if(!validate()){event.preventDefault();return;}
+    updatePreview();rememberDraft();
+    note.textContent='Review your draft in Gmail and press Send when you’re ready.';
+    note.dataset.state='ready';
+  });
+  emailLink.addEventListener('click',event=>{
+    if(!validate()){event.preventDefault();return;}
+    updatePreview();rememberDraft();
+    note.textContent='Review the draft in your email app and press Send there.';
+    note.dataset.state='ready';
   });
   const url=new URL(location.href);
-  if(url.searchParams.get('contact')==='submitted'){
-    form.reset();
-    try{sessionStorage.removeItem(draftKey);localStorage.removeItem('eclipwze-message-draft');}catch{}
-    updateDirectEmail();note.dataset.state='success';
-    note.textContent='Thank you! Your note has been submitted. We’ll reply to the email you provided.';
-    label.textContent='Send another note';
+  if(url.searchParams.has('contact')){
     url.searchParams.delete('contact');history.replaceState(null,'',url.pathname+url.search+url.hash);
-    if(!dialog.open)openDialog(dialog);
   }
+  note.textContent=idleNote;updatePreview();
 })();
