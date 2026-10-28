@@ -1,0 +1,55 @@
+/* Two autonomous illustrated studio moments. All movement follows time, never scroll. */
+.studio-moment{--moment-accent:#cc4d2a;position:relative;isolation:isolate;display:grid;grid-template-columns:42% 58%;min-height:410px;overflow:hidden;text-align:left}
+.jam-moment{margin:40px 0 60px;border-block:1px solid #b9b7a6;background:#e3e1d2}
+.moment-copy{position:relative;z-index:2;padding:46px 0 45px 42px;align-self:center}
+.moment-kicker{display:flex;align-items:center;gap:10px;font-size:8px;letter-spacing:.13em;text-transform:uppercase}
+.rec-light{width:6px;height:6px;background:var(--moment-accent);border-radius:50%;box-shadow:0 0 0 4px #cc4d2a12;animation:record-light 2s ease-in-out infinite}
+.moment-copy h3{font-family:var(--sans);font-size:clamp(30px,3.7vw,59px);line-height:1.02;letter-spacing:-.065em;font-weight:600;margin:25px 0 20px}
+.moment-copy h3 em{font-family:var(--serif);font-weight:500;color:var(--moment-accent)}
+.moment-copy p{font-size:12px;line-height:1.8;max-width:28ch;margin:0;color:#5d6252}
+.moment-stage{position:relative;min-width:0;align-self:stretch;overflow:hidden}
+.moment-disc{position:absolute;width:75%;aspect-ratio:1;border:1px solid #63715833;border-radius:50%;top:5%;left:12%;background:#b1bb9824;box-shadow:0 0 0 22px #a0ae8c0a,0 0 0 23px #6371581a}
+.moment-staff{position:absolute;inset:36% -10% auto;height:66px;background:repeating-linear-gradient(transparent 0 12px,#7a805b26 12px 13px);transform:rotate(-9deg)}
+.moment-person{position:absolute;width:58%;aspect-ratio:1;bottom:34px;overflow:hidden;transform-origin:50% 90%;will-change:transform}
+.moment-person img{position:absolute;width:200%;height:200%;max-width:none;object-fit:fill;left:0;top:0;pointer-events:none}
+.moment-person-a{left:0;z-index:2;animation:jam-violin 2.4s ease-in-out infinite}
+.moment-person-b{right:0;animation:jam-guitar 2.4s ease-in-out infinite}
+.moment-person-b img{left:-100%}
+.moment-floor{position:absolute;bottom:32px;left:7%;right:5%;height:1px;background:#a6aa93}
+.moment-floor:before,.moment-floor:after{content:'';position:absolute;bottom:0;width:33%;height:10px;border-radius:50%;background:#58684312;filter:blur(3px)}
+.moment-floor:before{left:6%}.moment-floor:after{right:5%}
+.moment-note{position:absolute;font-family:Georgia,serif;color:var(--moment-accent);font-size:27px;left:47%;top:38%;opacity:0;animation:melody-float 3.6s ease-out infinite;z-index:3}
+.note-two{left:64%;top:30%;animation-delay:1.2s;font-size:22px}.note-three{left:24%;top:31%;animation-delay:2.4s;font-size:19px}
+.moment-meta{position:absolute;bottom:13px;left:42px;right:27px;display:flex;justify-content:space-between;font-size:7px;letter-spacing:.13em;text-transform:uppercase;opacity:.6;z-index:4}
+.tape-mark{display:flex;gap:5px;align-items:center;margin-top:28px;color:#7c8069;font-size:7px;letter-spacing:.12em}.tape-reel{display:block;width:22px;height:22px;border:1px solid currentColor;border-radius:50%;background:repeating-conic-gradient(transparent 0 40deg,#79816b 40deg 60deg,transparent 60deg 120deg);animation:tape-roll 4s linear infinite}.tape-mark>span:last-child{margin-left:10px}
+.moment-pause{position:absolute;right:18px;top:18px;z-index:5;width:29px;height:29px;border:1px solid currentColor;border-radius:50%;display:grid;place-items:center;font-size:10px;opacity:.6}.moment-pause:hover,.moment-pause:focus-visible{opacity:1;background:#eeeade22}
+.outtake-moment{background:#d45a35;color:#241f18;padding-inline:var(--gutter);grid-template-columns:45% 55%;min-height:390px;--moment-accent:#f3e6c9}
+.outtake-moment:before,.outtake-moment:after{content:'';position:absolute;left:0;right:0;height:8px;background:repeating-linear-gradient(90deg,#272a211c 0 14px,transparent 14px 28px)}
+.outtake-moment:before{top:10px}.outtake-moment:after{bottom:10px}
+.outtake-moment .moment-copy{padding-left:15px}.outtake-moment .moment-copy p{color:#482c21;max-width:32ch}.outtake-moment .moment-meta{left:calc(var(--gutter) + 15px);right:var(--gutter);bottom:27px}
+.outtake-moment .moment-disc{border-color:#eeeade44;background:#f3d49c24;box-shadow:0 0 0 20px #eeeade08;top:8%;width:64%;left:20%}
+.outtake-moment .moment-person img{top:0;height:100%}
+.outtake-moment .moment-person-a{animation:outtake-repome 5.6s ease-in-out infinite;left:0;bottom:42px}
+.outtake-moment .moment-person-b{animation:outtake-dev 5.6s ease-in-out infinite;right:0;bottom:42px}
+.outtake-moment .moment-floor{background:#552c2233;bottom:40px}
+.outtake-mark{font-family:var(--serif);font-style:italic;font-size:22px;position:absolute;left:42%;top:14%;transform:rotate(-9deg);animation:outtake-caption 5.6s infinite;z-index:3}
+.laugh-ray{position:absolute;left:43%;top:32%;width:38px;height:36px;border-left:2px solid #f6e6c8;transform:rotate(25deg);animation:laugh-rays 5.6s infinite;opacity:0}.laugh-ray:after{content:'';position:absolute;left:9px;top:10px;height:20px;border-left:2px solid #f6e6c8;transform:rotate(30deg)}
+.studio-moment.scene-paused *,.studio-moment.scene-paused *:before,.studio-moment.scene-paused *:after,.motion-off .studio-moment *,.motion-off .studio-moment *:before,.motion-off .studio-moment *:after{animation-play-state:paused!important}
+@keyframes jam-violin{0%,100%{transform:rotate(-2deg) translateY(0)}25%{transform:rotate(1deg) translateY(-4px)}50%{transform:rotate(3deg) translateY(0)}75%{transform:rotate(0) translateY(-5px)}}
+@keyframes jam-guitar{0%,100%{transform:rotate(2deg) translateY(-3px)}25%{transform:rotate(-1deg) translateY(1px)}50%{transform:rotate(-3deg) translateY(-5px)}75%{transform:rotate(0) translateY(1px)}}
+@keyframes record-light{50%{opacity:.3}}@keyframes tape-roll{to{transform:rotate(360deg)}}
+@keyframes melody-float{0%{opacity:0;transform:translate(0,15px) rotate(-12deg)}25%{opacity:.75}80%{opacity:.5}100%{opacity:0;transform:translate(22px,-65px) rotate(18deg)}}
+@keyframes outtake-repome{0%,15%,85%,100%{transform:rotate(-1deg)}30%,45%,60%{transform:rotate(3deg) translate(5px,-5px) scaleY(.985)}37%,52%,67%{transform:rotate(1deg) translateY(1px)}75%{transform:rotate(-2deg)}}
+@keyframes outtake-dev{0%,15%,85%,100%{transform:rotate(1deg)}28%,43%,58%{transform:rotate(-4deg) translate(-5px,-4px)}35%,50%,65%{transform:rotate(-2deg) translateY(1px) scaleY(.985)}75%{transform:rotate(2deg)}}
+@keyframes outtake-caption{0%,12%,88%,100%{opacity:0;transform:translateY(8px) rotate(-9deg)}24%,76%{opacity:1;transform:translateY(0) rotate(-9deg)}}
+@keyframes laugh-rays{0%,15%,78%,100%{opacity:0}30%,45%,60%{opacity:1;transform:rotate(25deg) scale(1.1)}37%,52%,67%{opacity:.3;transform:rotate(25deg) scale(.85)}}
+@media(min-width:1550px){.studio-moment{min-height:470px}.moment-person{width:53%}.moment-person-a{left:4%}.moment-person-b{right:4%}}
+@media(max-width:700px){.studio-moment{grid-template-columns:1fr;min-height:0}.jam-moment{margin:20px 0 40px}.moment-copy{padding:30px 25px 0}.moment-copy h3{font-size:40px;margin:19px 0 14px}.moment-copy p{font-size:11px;max-width:31ch}.tape-mark{margin-top:18px}.moment-kicker{font-size:7px}.moment-stage{height:280px;margin-top:-5px}.moment-person{width:59%;bottom:28px}.moment-disc{width:70%;left:15%;top:6%}.moment-meta{left:25px;right:22px;bottom:10px;font-size:6px}.moment-pause{width:27px;height:27px;right:14px;top:14px}.outtake-moment{padding:0 var(--gutter) 25px}.outtake-moment .moment-copy{padding:40px 0 0}.outtake-moment .moment-copy h3{font-size:44px}.outtake-moment .moment-stage{height:280px;margin-top:5px}.outtake-moment .moment-meta{left:var(--gutter);bottom:25px;font-size:6px}.outtake-moment .moment-person-a,.outtake-moment .moment-person-b{bottom:35px}.outtake-mark{font-size:18px;top:10%;left:38%}.laugh-ray{width:25px;height:23px}.outtake-moment .moment-floor{bottom:35px}}
+@media(prefers-reduced-motion:reduce){.studio-moment *,.studio-moment *:before,.studio-moment *:after{animation:none!important}.outtake-mark{opacity:1}.moment-person{will-change:auto}.moment-pause{display:none}}
+.jam-moment{color:var(--ink)}
+.moment-stage{isolation:isolate}.moment-disc,.moment-staff{z-index:-1}
+@media(min-width:701px){.moment-person{width:min(58%,350px)}}
+.outtake-moment{min-height:420px}
+
+.outtake-mark{left:5%;top:9%;font-size:19px}
+@media(max-width:700px){.outtake-moment{min-height:0}.outtake-mark{top:3%;left:2%;font-size:16px}}

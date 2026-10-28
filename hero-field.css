@@ -1,0 +1,11 @@
+/* The opening paper becomes a cursor-responsive sound field. */
+.hero{position:relative;isolation:isolate}
+.hero-sound-field{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;overflow:hidden;contain:strict}
+.hero-sound-field canvas{display:block;width:100%;height:100%}
+.hero-field-cue{display:flex;align-items:center;gap:9px;font-size:7px;letter-spacing:.13em;font-weight:500;margin-top:19px;color:#656a57;line-height:1;text-transform:uppercase;pointer-events:none}
+.hero-field-cue svg{width:25px;height:13px;fill:none;stroke:#b35736;stroke-width:1.3}
+.hero-field-cue .touch-cue{display:none}
+@media(pointer:coarse){.hero-field-cue .mouse-cue{display:none}.hero-field-cue .touch-cue{display:inline}}
+@media(max-width:700px){.hero-field-cue{font-size:6px;margin-top:0;margin-bottom:12px;gap:6px}.hero-field-cue svg{width:20px;height:11px}}
+@media(prefers-reduced-motion:reduce){.hero-field-cue{display:none}}
+.motion-off .hero-field-cue{visibility:hidden}
