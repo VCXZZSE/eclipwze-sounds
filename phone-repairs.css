@@ -117,3 +117,15 @@
  .music-section>.section-title h2 em{display:block;margin:8px 0 0;line-height:1.12}
  .music-section>.section-title>.eyebrow{display:block;margin:0;max-width:none;font-size:10px;line-height:1.85;letter-spacing:.1em;text-align:left;color:#c8cebd}
 }
+
+/* Give the off-the-record link a footer lane below the full character artwork. */
+.hero .illustrated-stage{box-sizing:content-box;padding-bottom:64px}
+.hero .hero-next-scene{right:0;bottom:10px;min-height:44px;padding:0;border:0;gap:13px;z-index:7;text-decoration:none;letter-spacing:.08em}
+.hero .hero-next-scene>.hero-scene-label{display:block;font-family:var(--sans);font-size:9px;line-height:1.5;text-transform:uppercase}
+.hero .hero-scene-label strong{font-size:inherit;font-weight:600}
+.hero .hero-next-scene>.hero-scene-arrow{display:grid;place-items:center;width:30px;height:30px;border:1px solid currentColor;border-radius:50%;font-size:18px;line-height:1;transition:transform .2s}
+.hero .stage-coordinate{left:0;right:auto;bottom:24px}
+.hero .hero-next-scene:focus-visible{outline:2px solid var(--orange);outline-offset:5px}
+@media(hover:hover){.hero .hero-next-scene:hover>.hero-scene-arrow{transform:translate(2px,2px)}}
+@media(max-width:700px){.hero .hero-next-scene{right:14px;bottom:10px;gap:11px;min-height:44px;color:#26301d}.hero .hero-next-scene>.hero-scene-label{font-size:9px;line-height:1.45}.hero .hero-next-scene>.hero-scene-arrow{width:29px;height:29px;font-size:17px}}
+@media(prefers-reduced-motion:reduce){.hero .hero-next-scene>.hero-scene-arrow{transition:none}}
