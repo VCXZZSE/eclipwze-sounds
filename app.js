@@ -33,7 +33,7 @@ $$('dialog').forEach(dialog=>{
 function playVideo(id,title){
  $('#media-label').textContent='NOW PLAYING / ECLIPWZE SOUNDS';$('#media-title').textContent=title;
  $('#media-external').href='https://www.youtube.com/watch?v='+id;$('#media-external').textContent='Open on YouTube ↗';
- $('#media-content').innerHTML=`<iframe title="${escapeHTML(title)} — music video" src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?autoplay=1&rel=0" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><p class="player-note">If the embedded video is unavailable, use “Open on YouTube” below.</p>`;
+ const container=$('#media-content');container.replaceChildren();if(window.EclipwzePrivacy)window.EclipwzePrivacy.renderYouTube(container,id,title);else{const p=document.createElement('p');p.textContent='The player is unavailable. Use Open on YouTube below.';container.append(p);}
  openDialog($('#media-dialog'));
 }
 function openArticle(key){const article=ARTICLES[key];if(!article)return;$('#article-content').innerHTML=`<h1>${escapeHTML(article.title)}</h1><div class="article-meta">${article.date} · eclipwze74</div>`+article.paragraphs.map(p=>p==='LOGO OF ECLIPWZE SOUNDS'?`<img src="${assetURL('alignment-3.png')}" alt="Logo of Eclipwze Sounds">`:/^[WZE] – /.test(p)?`<h3>${escapeHTML(p)}</h3>`:p.startsWith('http')?`<p><a class="text-link" target="_blank" rel="noopener" href="${escapeHTML(p)}">${escapeHTML(p)}</a></p>`:`<p>${escapeHTML(p)}</p>`).join('');openDialog($('#article-dialog'));}

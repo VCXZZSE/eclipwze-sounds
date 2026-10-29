@@ -11,3 +11,4 @@ html.opening-active{overflow:hidden}
 @keyframes opening-breathe{50%{transform:scale(1.018);opacity:.92}}
 @media(max-width:700px){.opening-mark{width:190px}}
 @media(prefers-reduced-motion:reduce){.opening-screen,.opening-colour{transition:none}.opening-mark{animation:none}}
+.opening-help{position:absolute;top:calc(50% + 100px);left:7vw;right:7vw;text-align:center;color:#6d755e;font:11px/1.7 'DM Sans',Arial,sans-serif}.opening-help p{margin:0 auto 13px;max-width:40ch}.opening-help>div{display:flex;justify-content:center;gap:22px}.opening-help button{min-height:44px;padding:0;border:0;border-bottom:1px solid #b8bba7;background:none;color:#945438;font:10px 'DM Sans',Arial,sans-serif;cursor:pointer}.opening-help button:focus-visible{outline:2px solid #a7482d;outline-offset:5px}

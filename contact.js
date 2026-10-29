@@ -12,6 +12,7 @@
   const subjectPreview=document.getElementById('contact-subject-preview');
   const bodyPreview=document.getElementById('contact-body-preview');
   const draftKey='eclipwze-contact-pending';
+  try{localStorage.removeItem('eclipwze-message-draft');}catch{}
   const idleNote='Gmail opens with your draft. Review it and press Send there.';
   let currentDraft=null;
   function values(){return Object.fromEntries(new FormData(form));}
@@ -50,7 +51,7 @@
     event.preventDefault();if(!dialog.open)openDialog(dialog);
   });
   try{
-    const stored=JSON.parse(sessionStorage.getItem(draftKey)||localStorage.getItem('eclipwze-message-draft')||'null');
+    const stored=JSON.parse(sessionStorage.getItem(draftKey)||'null');
     if(stored)for(const key of ['name','email','phone','message','enquiry']){
       if(typeof stored[key]==='string'&&form.elements[key]){
         if(key!=='enquiry'||drafts.presets[stored[key]])form.elements[key].value=stored[key];
@@ -90,6 +91,7 @@
     note.textContent='Review the draft in your email app and press Send there.';
     note.dataset.state='ready';
   });
+  dialog.querySelector('[data-clear-contact-draft]')?.addEventListener('click',()=>{try{sessionStorage.removeItem(draftKey);}catch{}form.reset();form.elements.name.setCustomValidity('');message.setCustomValidity('');updatePreview();note.textContent='Your draft has been cleared.';});
   const url=new URL(location.href);
   if(url.searchParams.has('contact')){
     url.searchParams.delete('contact');history.replaceState(null,'',url.pathname+url.search+url.hash);

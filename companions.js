@@ -1,7 +1,7 @@
 (()=>{'use strict';
 const asset=new URL('assets/duo-companions.webp',document.currentScript.src).href;
 const media=matchMedia('(prefers-reduced-motion: reduce)'),small=()=>innerWidth<=700;
-const memory={get(k){try{return localStorage.getItem(k)}catch{return null}},set(k,v){try{localStorage.setItem(k,v)}catch{}}};
+const memory={get(k){try{return window.EclipwzePrivacy?.allows('preferences')?localStorage.getItem(k):null}catch{return null}},set(k,v){try{if(window.EclipwzePrivacy?.allows('preferences'))localStorage.setItem(k,v)}catch{}}};
 let hidden=true,paused=false,started=false,dirty=true,mode='',dock='',last=0,next=0,frames=[];
 const stage=document.createElement('div');stage.className='pals-scene';stage.hidden=hidden;stage.setAttribute('aria-label','Repome and Dev animated companions');
 const panel=document.createElement('div');panel.className='pals-tools';panel.innerHTML='<button class="pals-launch" aria-expanded="false" aria-controls="pals-options"><span aria-hidden="true">✳</span> THE DUO</button><div id="pals-options" class="pals-options" hidden><small>REPOME + DEV / IN THE MARGINS</small><p>Drag us somewhere.<br>Tap us for an encore.</p><button data-option="pause"></button><button data-option="hide"></button></div>';

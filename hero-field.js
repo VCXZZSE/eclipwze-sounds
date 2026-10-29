@@ -10,7 +10,7 @@
  let width=0,height=0,cols=0,rows=0,values,step=22,frame=0,last=0,visible=true,dirty=true;
  let x=0,y=0,targetX=0,targetY=0,energy=0,targetEnergy=0,lastDrop=0,lastInput=0,phase=0;
  const ripples=[];
- const enabled=()=>!document.body.classList.contains('motion-off')&&!reduced.matches;
+ const enabled=()=>!document.documentElement.classList.contains('opening-active')&&!document.body.classList.contains('motion-off')&&!reduced.matches;
  function size(){
   const rect=hero.getBoundingClientRect();width=rect.width;height=rect.height;
   const dpr=Math.min(devicePixelRatio||1,width<701?1.25:1.5);canvas.width=Math.ceil(width*dpr);canvas.height=Math.ceil(height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);
@@ -87,5 +87,6 @@
  document.addEventListener('eclipwze-theme',()=>{dirty=true;if(visible){draw(performance.now());wake();}});
  reduced.addEventListener('change',()=>{dirty=true;wake();});
  document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(frame);frame=0;}else if(visible){last=0;wake();}});
+ window.addEventListener('eclipwze:artwork-visible',()=>{dirty=true;last=0;wake();});
  size();
 })();
